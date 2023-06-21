@@ -1,4 +1,4 @@
-package container-controller
+package containerController
 
 import (
 	"net/http"
@@ -6,5 +6,5 @@ import (
 
 // Handler for the /users route
 func Handler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Users page"))
+	w.Write([]byte("Smth"))
 }
