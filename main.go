@@ -13,10 +13,11 @@ func main() {
 	// Define the routes and their corresponding handlers
 	router.HandleFunc("/", homeHandler)
 	router.HandleFunc("/container", containerController.Handler)
+	router.HandleFunc("/containers", containerController.CheckContainers)
 
 	// Start the HTTP server
-	log.Println("Server listening on :8080")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Println("Server listening on :9000")
+	log.Fatal(http.ListenAndServe(":9000", router))
 }
 
 // Handler for the home route
