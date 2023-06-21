@@ -1,4 +1,4 @@
-package containerController
+package containersController
 
 import (
 	"net/http"
@@ -8,13 +8,8 @@ import (
 	"github.com/docker/docker/api/types"
 )
 
-// Handler 
-func Handler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Smth"))
-}
-
-// Check Containers
-func CheckContainers(w http.ResponseWriter, r *http.Request) {
+// List Containers
+func ListContainers(w http.ResponseWriter, r *http.Request) {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		http.Error(w, "Failed to create Docker client", http.StatusInternalServerError)
@@ -54,4 +49,3 @@ func CheckContainers(w http.ResponseWriter, r *http.Request) {
 	// Write the JSON response
 	w.Write(jsonData)
 }
-

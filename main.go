@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"github.com/htetpaihtun/BDF-server-side-execution-service/containerController"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/containersController"
 )
 
 func main() {
@@ -12,8 +12,7 @@ func main() {
 
 	// Define the routes and their corresponding handlers
 	router.HandleFunc("/", homeHandler)
-	router.HandleFunc("/container", containerController.Handler)
-	router.HandleFunc("/containers", containerController.CheckContainers)
+	router.HandleFunc("/containers/", containersController.Handler)
 
 	// Start the HTTP server
 	log.Println("Server listening on :9000")
