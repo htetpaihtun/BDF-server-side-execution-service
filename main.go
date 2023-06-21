@@ -12,7 +12,7 @@ func main() {
 
 	// Define the routes and their corresponding handlers
 	router.HandleFunc("/", homeHandler)
-	router.HandleFunc("/container", container-controller.Handler)
+	router.HandleFunc("/container", containerController.Handler)
 
 	// Start the HTTP server
 	log.Println("Server listening on :8080")
@@ -21,5 +21,5 @@ func main() {
 
 // Handler for the home route
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Welcome to the home page!"))
+	w.Write([]byte("Service is up and running.. C:"))
 }
