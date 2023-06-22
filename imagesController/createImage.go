@@ -1,5 +1,5 @@
-// package createImage
-package main
+package imagesController
+// package main
 
 import (
 	"io/ioutil"

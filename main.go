@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/htetpaihtun/BDF-server-side-execution-service/containersController"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/imagesController"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 
 	router.HandleFunc("/", homeHandler)
 	router.HandleFunc("/containers/", containersController.Handler)
-	// router.HandleFunc("/images/", imagesController.Handler)
+	router.HandleFunc("/images/", imagesController.Handler)
 
 	log.Println("Server listening on :9000")
 	log.Fatal(http.ListenAndServe(":9000", router))

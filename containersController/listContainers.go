@@ -8,7 +8,6 @@ import (
 	"github.com/docker/docker/api/types"
 )
 
-// List Containers
 func ListContainers(w http.ResponseWriter, r *http.Request) {
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
