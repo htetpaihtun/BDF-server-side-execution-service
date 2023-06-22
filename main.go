@@ -9,6 +9,8 @@ import (
 
 	"github.com/htetpaihtun/BDF-server-side-execution-service/containersController"
 	"github.com/htetpaihtun/BDF-server-side-execution-service/imagesController"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/healthCheck"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/logger"
 )
 
 func main() {
@@ -22,11 +24,22 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/", homeHandler)
+	router.HandleFunc("/health", healthCheck.Handler)
 	router.HandleFunc("/containers/", containersController.Handler)
 	router.HandleFunc("/images/", imagesController.Handler)
+	// router.HandleFunc("/logs", logger.RetrieveLog)
+
+	filePath := "./logger/logs/docker-logs.log" // log dir should be dynamic, to be fix later
+	go func() {
+		err = logger.WriteLog(filePath)
+		if err != nil {
+			log.Fatal("Failed to write log file:", err)
+		}
+	}()
 
 	log.Println("Server listening on :9000")
 	log.Fatal(http.ListenAndServe(":9000", router))
+
 }
 
 // Handler for the home route
