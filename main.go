@@ -6,6 +6,7 @@ import (
 	"strings"
 	"os"
 	"net/http"
+
 	"github.com/htetpaihtun/BDF-server-side-execution-service/containersController"
 )
 
@@ -17,14 +18,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Create a new router
 	router := http.NewServeMux()
 
-	// Define the routes and their corresponding handlers
 	router.HandleFunc("/", homeHandler)
 	router.HandleFunc("/containers/", containersController.Handler)
-
-	// Start the HTTP server
+	router.HandleFunc("/images/", imagesController.Handler)
+	
 	log.Println("Server listening on :9000")
 	log.Fatal(http.ListenAndServe(":9000", router))
 }
@@ -34,6 +33,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Service is up and running.. C:"))
 }
 
+// Fetch env variables from file and set to OS
 func loadEnvFromFile(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {
