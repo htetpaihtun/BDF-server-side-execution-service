@@ -1,0 +1,4 @@
+FROM {{ .Image }}
+WORKDIR {{ .WorkDir }}
+
+RUN {{ .Commands }}
