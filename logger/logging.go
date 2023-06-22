@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"io/ioutil"
+	"net/http"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
@@ -58,4 +60,22 @@ func WriteLog(filePath string) error {
 	}
 
 	return nil
+}
+
+func RetrieveLog(w http.ResponseWriter, r *http.Request) {
+
+	logFilePath := "./logger/logs/docker-logs.log" // log dir should be dynamic : TO FIX LATER
+
+	// Read the log file
+	logData, err := ioutil.ReadFile(logFilePath)
+	if err != nil {
+		http.Error(w, "Failed to read log file", http.StatusInternalServerError)
+		return
+	}
+
+	// Set the response content type
+	w.Header().Set("Content-Type", "text/plain")
+
+	// Write the log data to the response
+	w.Write(logData)
 }

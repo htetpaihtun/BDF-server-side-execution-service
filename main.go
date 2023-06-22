@@ -27,9 +27,9 @@ func main() {
 	router.HandleFunc("/health", healthCheck.Handler)
 	router.HandleFunc("/containers/", containersController.Handler)
 	router.HandleFunc("/images/", imagesController.Handler)
-	// router.HandleFunc("/logs", logger.RetrieveLog)
+	router.HandleFunc("/logs", logger.RetrieveLog) 
 
-	filePath := "./logger/logs/docker-logs.log" // log dir should be dynamic, to be fix later
+	filePath := "./logger/logs/docker-logs.log" // log dir should be dynamic : TO FIX LATER
 	go func() {
 		err = logger.WriteLog(filePath)
 		if err != nil {
@@ -42,7 +42,7 @@ func main() {
 
 }
 
-// Handler for the home route
+// Handler for the home route : WILL MOVE SOON
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Service is up and running.. C:"))
 }
