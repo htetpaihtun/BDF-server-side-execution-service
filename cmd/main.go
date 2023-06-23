@@ -30,7 +30,7 @@ func main() {
 	router.HandleFunc("/logs", logger.RetrieveLog) 
 
 	// running logging go routine
-	filePath := "./logger/logs/docker-logs.log" // log dir should be dynamic : TO FIX LATER
+	filePath := "../logger/logs/docker-logs.log" // log dir should be dynamic : TO FIX LATER
 	go func() {
 		err = logger.WriteLog(filePath)
 		if err != nil {
