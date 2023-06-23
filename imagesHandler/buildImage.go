@@ -1,4 +1,4 @@
-package imagesController
+package imagesHandler
 
 import (
 	"net/http"

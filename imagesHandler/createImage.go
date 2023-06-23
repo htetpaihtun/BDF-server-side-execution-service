@@ -1,4 +1,4 @@
-package imagesController
+package imagesHandler
 // package main
 
 import (

@@ -1,4 +1,4 @@
-package containersController
+package containersHandler
 
 import (
 	"net/http"

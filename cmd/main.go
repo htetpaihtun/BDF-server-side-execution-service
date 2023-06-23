@@ -7,8 +7,8 @@ import (
 	"os"
 	"net/http"
 
-	"github.com/htetpaihtun/BDF-server-side-execution-service/containersController"
-	"github.com/htetpaihtun/BDF-server-side-execution-service/imagesController"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/containersHandler"
+	"github.com/htetpaihtun/BDF-server-side-execution-service/imagesHandler"
 	"github.com/htetpaihtun/BDF-server-side-execution-service/healthCheck"
 	"github.com/htetpaihtun/BDF-server-side-execution-service/logger"
 )
@@ -16,7 +16,7 @@ import (
 func main() {
 
 	// Load env variable 
-	err := loadEnvFromFile(".env")
+	err := loadEnvFromFile("../.env")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,10 +25,11 @@ func main() {
 
 	router.HandleFunc("/", homeHandler)
 	router.HandleFunc("/health", healthCheck.Handler)
-	router.HandleFunc("/containers/", containersController.Handler)
-	router.HandleFunc("/images/", imagesController.Handler)
+	router.HandleFunc("/containers/", containersHandler.Handler)
+	router.HandleFunc("/images/", imagesHandler.Handler)
 	router.HandleFunc("/logs", logger.RetrieveLog) 
 
+	// running logging go routine
 	filePath := "./logger/logs/docker-logs.log" // log dir should be dynamic : TO FIX LATER
 	go func() {
 		err = logger.WriteLog(filePath)
